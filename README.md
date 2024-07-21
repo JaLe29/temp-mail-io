@@ -1,5 +1,7 @@
 # 📧 temp-mail-io
 
+[![npm version](https://badge.fury.io/js/temp-mail-io.svg)](https://badge.fury.io/js/temp-mail-io)
+
 temp-mail-io is a powerful Node.js/Typescript application that harnesses the API of [temp-mail.io](https://temp-mail.io/) to provide a seamless temporary email experience. With just a few lines of code, you can create disposable email addresses, retrieve messages with attachments, and delete accounts effortlessly.
 
 ## ✨ Features
