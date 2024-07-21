@@ -63,7 +63,9 @@ export const fetchEmails = async (email: string) => {
 				bodyHtml: email.body_html,
 				createdAt: new Date(email.created_at),
 				attachments: email.attachments.map(attachment => ({
-					...attachment,
+					name: attachment.name,
+					size: attachment.size,
+					id: attachment.id,
 					url: `${BASE_API}/api/v3/attachment/${attachment.id}?download=1`,
 				})),
 			}) as FetchEmailsResponse,

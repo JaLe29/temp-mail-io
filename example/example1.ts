@@ -6,6 +6,7 @@ const start = async (): Promise<void> => {
 	console.log(r)
 
 	console.log("Fetching emails")
+	// or you can use await fetchTempEmailsWithWait(tempEmail.email, 1, 30000) to wait for the email
 	const emails = await fetchEmails(r.email);
 	console.log(emails)
 
