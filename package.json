@@ -1,6 +1,6 @@
 {
   "name": "temp-mail-io",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
@@ -8,14 +8,14 @@
     "dist"
   ],
   "keywords": [
-	"temp-mail",
-	"temp-mail.io",
-	"temp-mail-io",
-	"temp-mail-api",
-	"temp-mail-node",
-	"temp-mail-js",
-	"temp-mail-io-node",
-	"temp-mail-io-js"
+    "temp-mail",
+    "temp-mail.io",
+    "temp-mail-io",
+    "temp-mail-api",
+    "temp-mail-node",
+    "temp-mail-js",
+    "temp-mail-io-node",
+    "temp-mail-io-js"
   ],
   "repository": {
     "type": "git",
