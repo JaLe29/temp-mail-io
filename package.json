@@ -23,11 +23,9 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "jest",
     "build": "yarn clean && vite build --mode release && yarn build:types",
     "build:types": "tsc ./src/index.ts --declaration --emitDeclarationOnly --declarationDir ./dist/types",
     "clean": "rimraf dist",
-    "test:all": "yarn lint && yarn build && yarn test",
     "start:demo": "ts-node -r tsconfig-paths/register --project tsconfig.json --files ./example/example1.ts",
     "start:publish": "ts-node -r tsconfig-paths/register --project tsconfig.json --files ./scripts/lib-publish.ts"
   },
@@ -35,7 +33,6 @@
     "axios": "^1.7.2"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.1.20",
     "@types/node": "^18.11.9",
     "@types/shelljs": "^0.8.11",
     "rimraf": "^3.0.2",
