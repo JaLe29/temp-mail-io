@@ -1,0 +1,32 @@
+name: deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install dependencies
+        run: yarn
+
+      - name: publish
+        env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        run: |
+          yarn build
+          echo "//registry.yarnpkg.com/:_authToken=$NPM_PUBLISH_TOKEN" >>~/.npmrc
+          yarn start:publish patch
+
+      - name: Commit new version
+        run: |
+          git config --global user.name 'Github action'
+          git config --global user.email 'jaledeveloper@gmail.com'
+          git add ./package.json
+          git commit -m "Github Action: Version increment"
+          git push
