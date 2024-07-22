@@ -82,13 +82,18 @@ export const fetchEmails = async (email: string) => {
  * @param timeout timeout in milliseconds
  * @returns list of emails
  */
-export const fetchEmailsWithWait = async (email: string, expectedEmails: number, timeout: number = 30000) => {
+export const fetchEmailsWithWait = async (email: string, expectedEmails: number, timeout: number = 30000): Promise<FetchEmailsResponse[]> => {
 	let emails: FetchEmailsResponse[] = [];
 	let currentTimeout = 0;
-	while (emails.length < expectedEmails && currentTimeout < timeout) {
+
+	while (emails.length < expectedEmails) {
 		emails = await fetchEmails(email);
 		await new Promise(resolve => setTimeout(resolve, 1000));
 		currentTimeout += 1000;
+
+		if (currentTimeout >= timeout) {
+			throw new Error('Timeout while waiting for emails');
+		}
 	}
 
 	return emails;
