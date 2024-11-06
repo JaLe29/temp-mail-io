@@ -29,9 +29,6 @@
     "start:demo": "ts-node -r tsconfig-paths/register --project tsconfig.json --files ./example/example1.ts",
     "start:publish": "ts-node -r tsconfig-paths/register --project tsconfig.json --files ./scripts/lib-publish.ts"
   },
-  "dependencies": {
-    "axios": "^1.7.2"
-  },
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/shelljs": "^0.8.11",

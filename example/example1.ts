@@ -12,6 +12,16 @@ const start = async (): Promise<void> => {
 
 	console.log("Deleting email")
 	deleteEmail(r.email, r.token);
+
+	try {
+		 await fetchEmails(r.email);
+	} catch (e) {
+		if (e.toString().includes('Email not found')) {
+			console.log('Email not found, that is good! Because we deleted it.')
+		} else {
+			console.error(e)
+		}
+	}
 };
 
 start().catch(console.error);

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 interface NewResponse {
 	email: string;
 	token: string;
@@ -39,10 +37,12 @@ const BASE_API = 'https://api.internal.temp-mail.io';
 export const newEmail = async () => {
 	const url = `${BASE_API}/api/v3/email/new`;
 
-	const data = await axios.post(url);
-	const response = data.data as NewResponse;
+	const response = await fetch(url, {
+		method: 'POST',
+	});
+	const data = await response.json() as NewResponse;
 
-	return response;
+	return data;
 };
 
 /**
@@ -53,9 +53,14 @@ export const newEmail = async () => {
  */
 export const fetchEmails = async (email: string) => {
 	const url = `${BASE_API}/api/v3/email/${email}/messages`;
-	const data = await axios.get(url);
-	const response = data.data as FetchEmailsPureResponse[];
-	const transformedResponse = response.map(
+	const response = await fetch(url);
+	const data = await response.json()
+
+	if (data.code === 101) {
+		throw new Error('Email not found');
+	}
+
+	const transformedResponse = (data as FetchEmailsPureResponse[]).map(
 		email =>
 			({
 				...email,
@@ -71,7 +76,7 @@ export const fetchEmails = async (email: string) => {
 			}) as FetchEmailsResponse,
 	);
 
-	return transformedResponse as FetchEmailsResponse[];
+	return transformedResponse;
 };
 
 /**
@@ -107,5 +112,11 @@ export const fetchEmailsWithWait = async (email: string, expectedEmails: number,
  */
 export const deleteEmail = async (email: string, token: string) => {
 	const url = `${BASE_API}/api/v3/email/${email}`;
-	await axios.delete(url, { data: { token } });
+	await fetch(url, {
+		method: 'DELETE',
+		body: JSON.stringify({ token }),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 };
