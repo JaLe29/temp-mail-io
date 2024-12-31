@@ -120,3 +120,26 @@ export const deleteEmail = async (email: string, token: string) => {
 		},
 	});
 };
+
+/**
+ * Get all domains from the temp-mail.io service
+ *
+ * @returns list of domains
+ */
+export const getDomains = async () => {
+	const url = `${BASE_API}/api/v3/domains`;
+	const response = await fetch(url);
+	const data = await response.json() as {
+		name: string;
+		type: string;
+		forward_available: boolean;
+		forward_max_seconds: number;
+	}[];
+
+	return data.map(domain => ({
+		name: domain.name,
+		type: domain.type,
+		forwardAvailable: domain.forward_available,
+		forwardMaxSeconds: domain.forward_max_seconds,
+	}));
+};
