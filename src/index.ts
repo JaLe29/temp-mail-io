@@ -129,7 +129,7 @@ export const deleteEmail = async (email: string, token: string) => {
 export const getDomains = async () => {
 	const url = `${BASE_API}/api/v3/domains`;
 	const response = await fetch(url);
-	const data = await response.json() as {
+	const data = (await response.json()).domains as {
 		name: string;
 		type: string;
 		forward_available: boolean;
