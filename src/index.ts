@@ -57,7 +57,7 @@ export const fetchEmails = async (email: string) => {
 	const data = await response.json()
 
 	if (data.code === 101) {
-		throw new Error('Email not found');
+		throw new Error('Email ' + email + ' was not found');
 	}
 
 	const transformedResponse = (data as FetchEmailsPureResponse[]).map(
@@ -97,7 +97,7 @@ export const fetchEmailsWithWait = async (email: string, expectedEmails: number,
 		currentTimeout += 1000;
 
 		if (currentTimeout >= timeout) {
-			throw new Error('Timeout while waiting for emails');
+			throw new Error('Timeout while waiting for emails in ' + email);
 		}
 	}
 
